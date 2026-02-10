@@ -1,0 +1,14 @@
+{
+  "name": "electron-inventory-app",
+  "version": "1.0.0",
+  "description": "基于 Electron 的库存管理桌面应用（模拟实现）",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "lint": "node --check src/main.js && node --check src/preload.js && node --check src/renderer.js",
+    "test": "node src/services/self-test.js"
+  },
+  "devDependencies": {
+    "electron": "^31.0.2"
+  }
+}
