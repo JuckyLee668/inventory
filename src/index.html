@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>库存管理 App（Electron）</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>库存管理 App（模拟版）</h1>
+      <p>支持入库、出库、条码识别、语音识别、数据同步</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>库存列表</h2>
+        <button id="refresh">刷新库存</button>
+        <ul id="inventory"></ul>
+      </section>
+
+      <section>
+        <h2>入库 / 出库</h2>
+        <input id="sku" placeholder="SKU，例如 SKU-1001" />
+        <input id="qty" type="number" min="1" placeholder="数量" />
+        <select id="operatorRole">
+          <option value="admin">admin</option>
+          <option value="operator">operator</option>
+        </select>
+        <button id="inbound">采购入库</button>
+        <button id="outbound">销售出库</button>
+      </section>
+
+      <section>
+        <h2>条码拍照识别（模拟）</h2>
+        <input id="barcodeInput" placeholder="输入模拟条码（13位数字）" />
+        <button id="barcodeBtn">识别条码</button>
+      </section>
+
+      <section>
+        <h2>语音输入识别（模拟）</h2>
+        <input id="voiceInput" placeholder="例如：纯牛奶 2026-01-01 保质期 30 天" />
+        <button id="voiceBtn">识别语音</button>
+      </section>
+
+      <section>
+        <h2>数据上传（模拟）</h2>
+        <button id="syncBtn">上传当前库存快照</button>
+      </section>
+
+      <section>
+        <h2>低库存预警</h2>
+        <input id="threshold" type="number" min="1" value="50" />
+        <button id="warningBtn">检查预警</button>
+      </section>
+
+      <section>
+        <h2>输出结果</h2>
+        <pre id="output"></pre>
+      </section>
+    </main>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

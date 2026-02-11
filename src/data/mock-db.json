@@ -1,0 +1,13 @@
+{
+  "products": [
+    { "sku": "SKU-1001", "name": "纯牛奶 250ml", "barcode": "6901234567892", "stock": 120 },
+    { "sku": "SKU-1002", "name": "矿泉水 550ml", "barcode": "6923456789015", "stock": 200 }
+  ],
+  "inbounds": [],
+  "outbounds": [],
+  "uploads": [],
+  "users": [
+    { "username": "admin", "role": "admin" },
+    { "username": "operator", "role": "operator" }
+  ]
+}

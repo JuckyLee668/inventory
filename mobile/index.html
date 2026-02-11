@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>库存管理手机端</title>
+    <style>
+      body { font-family: sans-serif; margin: 0; background: #f3f4f6; }
+      header { background: #2563eb; color: #fff; padding: 12px; }
+      main { padding: 12px; display: grid; gap: 10px; }
+      .card { background: #fff; border-radius: 8px; padding: 10px; }
+      input, button { width: 100%; margin: 4px 0; padding: 10px; box-sizing: border-box; }
+      button { border: none; border-radius: 6px; background: #2563eb; color: #fff; }
+      pre { white-space: pre-wrap; background: #111827; color: #d1fae5; padding: 8px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <header><h2>库存管理手机端</h2></header>
+    <main>
+      <div class="card">
+        <h3>快速出入库</h3>
+        <input id="sku" placeholder="SKU-1001" />
+        <input id="qty" type="number" value="1" min="1" />
+        <button id="inbound">入库</button>
+        <button id="outbound">出库</button>
+      </div>
+      <div class="card">
+        <h3>库存查询</h3>
+        <button id="list">刷新库存</button>
+      </div>
+      <div class="card"><pre id="output"></pre></div>
+    </main>
+    <script>
+      const apiBase = localStorage.getItem('apiBase') || 'http://127.0.0.1:3000';
+      const output = document.getElementById('output');
+      const print = (v) => (output.textContent = JSON.stringify(v, null, 2));
+
+      async function post(path, body) {
+        const res = await fetch(apiBase + path, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        return res.json();
+      }
+
+      document.getElementById('list').onclick = async () => {
+        const res = await fetch(apiBase + '/api/inventory');
+        print(await res.json());
+      };
+
+      document.getElementById('inbound').onclick = async () => {
+        print(await post('/api/inbound', {
+          sku: document.getElementById('sku').value,
+          quantity: Number(document.getElementById('qty').value),
+          type: '移动端入库',
+          operatorRole: 'operator'
+        }));
+      };
+
+      document.getElementById('outbound').onclick = async () => {
+        print(await post('/api/outbound', {
+          sku: document.getElementById('sku').value,
+          quantity: Number(document.getElementById('qty').value),
+          type: '移动端出库',
+          operatorRole: 'operator'
+        }));
+      };
+    </script>
+  </body>
+</html>

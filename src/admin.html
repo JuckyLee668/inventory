@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>库存管理后台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="admin-layout">
+    <aside class="sidebar">
+      <h1>库存管理后台</h1>
+      <button class="nav-item active" data-tab="overview">项目概览</button>
+      <button class="nav-item" data-tab="inventory">库存管理</button>
+      <button class="nav-item" data-tab="recognition">识别中心</button>
+      <button class="nav-item" data-tab="sync">数据同步</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h2 id="page-title">项目概览</h2>
+        <div>
+          <button id="btn-toast">提交审核</button>
+        </div>
+      </header>
+
+      <section id="tab-overview" class="tab-panel show">
+        <div class="card">
+          <h3>三端架构</h3>
+          <ul>
+            <li>手机端：移动 Web App，适配扫码与快速出入库。</li>
+            <li>电脑后台：Electron 管理后台，支持 RBAC 和可视化。</li>
+            <li>服务器端：Node.js API 服务，统一处理库存与识别接口。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="tab-inventory" class="tab-panel">
+        <div class="card">
+          <h3>库存列表</h3>
+          <button id="refresh">刷新库存</button>
+          <ul id="inventory"></ul>
+        </div>
+        <div class="card">
+          <h3>入库 / 出库</h3>
+          <input id="sku" placeholder="SKU，例如 SKU-1001" />
+          <input id="qty" type="number" min="1" placeholder="数量" />
+          <select id="operatorRole">
+            <option value="admin">admin</option>
+            <option value="operator">operator</option>
+          </select>
+          <button id="inbound">采购入库</button>
+          <button id="outbound">销售出库</button>
+          <input id="threshold" type="number" min="1" value="50" />
+          <button id="warningBtn">检查低库存预警</button>
+        </div>
+      </section>
+
+      <section id="tab-recognition" class="tab-panel">
+        <div class="card">
+          <h3>条码识别</h3>
+          <input id="barcodeInput" placeholder="输入模拟条码（13位数字）" />
+          <button id="barcodeBtn">识别条码</button>
+        </div>
+        <div class="card">
+          <h3>语音识别</h3>
+          <input id="voiceInput" placeholder="例如：纯牛奶 2026-01-01 保质期 30 天" />
+          <button id="voiceBtn">识别语音</button>
+        </div>
+      </section>
+
+      <section id="tab-sync" class="tab-panel">
+        <div class="card">
+          <h3>数据同步</h3>
+          <button id="syncBtn">上传当前库存快照</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>输出结果</h3>
+        <pre id="output"></pre>
+      </section>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>

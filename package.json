@@ -1,0 +1,15 @@
+{
+  "name": "electron-inventory-app",
+  "version": "1.1.0",
+  "description": "库存管理三端应用（手机端、电脑后台、服务器端）",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:server": "node server/index.js",
+    "lint": "node --check src/main.js && node --check src/preload.js && node --check src/renderer.js && node --check server/index.js && node --check server/app-server.js",
+    "test": "node src/services/self-test.js && node server/self-test.js"
+  },
+  "devDependencies": {
+    "electron": "^31.0.2"
+  }
+}
